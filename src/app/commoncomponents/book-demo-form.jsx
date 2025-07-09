@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useEffect } from "react"
@@ -17,9 +16,11 @@ import {
   IconButton,
   Snackbar,
   Alert,
+  Modal,
 } from "@mui/material"
 import { CheckCircle, Close, Star, People, FlashOn } from "@mui/icons-material"
 import ParticleBackground from "../components/particle-background"
+import {submitDemoRequest} from "../apis/apis"
 
 const BookDemoForm = ({ open, onClose }) => {
   const [loading, setLoading] = useState(false)
@@ -42,12 +43,11 @@ const BookDemoForm = ({ open, onClose }) => {
   // Hide navbar and footer when form is open
   useEffect(() => {
     if (open) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden "
       const navbar = document.querySelector("nav")
       const footer = document.querySelector("footer")
       if (navbar) navbar.style.display = "none"
       if (footer) footer.style.display = "none"
-
       return () => {
         document.body.style.overflow = "auto"
         if (navbar) navbar.style.display = ""
@@ -100,7 +100,18 @@ const BookDemoForm = ({ open, onClose }) => {
     "Other",
   ]
 
+  const sanitizeInput = (input) => {
+    return input.replace(/[<>{}]/g, "") // Basic sanitization to remove potentially harmful characters
+  }
+
   const handleInputChange = (field, value) => {
+    if (field === "phoneNumber") {
+      // Allow only numeric input for phone number
+      value = value.replace(/\D/g, "").slice(0, 10)
+    } else if (typeof value === "string") {
+      // Sanitize text inputs
+      value = sanitizeInput(value)
+    }
     setFormData((prev) => ({
       ...prev,
       [field]: value,
@@ -164,6 +175,15 @@ const BookDemoForm = ({ open, onClose }) => {
       return false
     }
 
+    if (formData.industryType === "Other" && !formData.otherIndustry) {
+      setSnackbar({
+        open: true,
+        message: "Please specify your industry.",
+        severity: "error",
+      })
+      return false
+    }
+
     return true
   }
 
@@ -191,16 +211,18 @@ const BookDemoForm = ({ open, onClose }) => {
         timestamp: new Date().toISOString(),
         platform: "Communication - Chat",
       }
+      const resp = await submitDemoRequest(payload)
 
-      console.log("Demo request submitted:", payload)
+      if (!resp.success) {
+        throw new Error(resp.message || "Failed to submit demo request")
+      }
 
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
+      console.log("Demo request submitted:", resp)
       setShowThankYou(true)
 
       setSnackbar({
         open: true,
-        message: "We'll contact you shortly to schedule your demo.",
+        message: resp.message || "We'll contact you shortly to schedule your demo.",
         severity: "success",
       })
 
@@ -225,7 +247,7 @@ const BookDemoForm = ({ open, onClose }) => {
       console.error("Error submitting form:", error)
       setSnackbar({
         open: true,
-        message: "There was an error submitting your request. Please try again.",
+        message: error.message || "There was an error submitting your request. Please try again.",
         severity: "error",
       })
     } finally {
@@ -292,9 +314,10 @@ const BookDemoForm = ({ open, onClose }) => {
   }
 
   const selectStyles = {
+    color:"white",
     borderRadius: 2,
-      backgroundColor: "rgba(30, 41, 59, 0.5)",
-      border: "1px solid rgba(139, 92, 246, 0.3)",
+    backgroundColor: "rgba(30, 41, 59, 0.5)",
+    border: "1px solid rgba(139, 92, 246, 0.3)",
     "& .MuiSelect-select": {
       padding: "14px 16px",
       fontSize: "0.95rem",
@@ -302,7 +325,6 @@ const BookDemoForm = ({ open, onClose }) => {
     "& .MuiSelect-icon": {
       color: "rgba(255, 255, 255, 0.7)",
     },
-    
   }
 
   const labelStyles = {
@@ -317,46 +339,28 @@ const BookDemoForm = ({ open, onClose }) => {
   }
 
   return (
-    <Box
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="book-demo-form-title"
+      aria-describedby="book-demo-form-description"
       sx={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: "linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        zIndex: 1300,
-        overflowY: "hidden",
         bgcolor: "transparent",
-        "&::-webkit-scrollbar": {
-          display: "none",
-        },
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
       }}
     >
-      <Box sx={{ position: "absolute", inset: 0, overflow: "hidden" }}>
-        <ParticleBackground
-          count={150}
-          colors={["#8B5CF6", "#A855F7", "#C084FC", "#DDD6FE", "#60A5FA", "#FBBF24"]}
-          minSize={1.5}
-          maxSize={5}
-          speed={0.5}
-          connected={true}
-          opacity={0.8}
-        />
-      </Box>
       <Box
         sx={{
+          position: "relative",
+          maxWidth: 800,
+          width: "100%",
+          maxHeight: "100vh",
+          overflowY: "auto",
           bgcolor: "transparent",
           background: "linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%)",
-          position: "relative",
-          overflow: "auto",
-          maxHeight: "100%",
-          paddingTop: "4.5rem",
+          borderRadius: 2,
           "&::-webkit-scrollbar": {
             display: "none",
           },
@@ -364,6 +368,17 @@ const BookDemoForm = ({ open, onClose }) => {
           msOverflowStyle: "none",
         }}
       >
+        <Box sx={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+          <ParticleBackground
+            count={150}
+            colors={["#8B5CF6", "#A855F7", "#C084FC", "#DDD6FE", "#60A5FA", "#FBBF24"]}
+            minSize={1.5}
+            maxSize={5}
+            speed={0.5}
+            connected={true}
+            opacity={0.8}
+          />
+        </Box>
         <Box sx={{ position: "relative", zIndex: 10, maxHeight: "100%" }}>
           <Box sx={{ p: 4, pb: 2, position: "relative" }}>
             <IconButton
@@ -580,41 +595,45 @@ const BookDemoForm = ({ open, onClose }) => {
                   {/* Personal Information */}
                   <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 3 }}>
                     <TextField
-                      label="Full Name *"
+                      label="Full Name"
                       value={formData.fullName}
                       onChange={(e) => handleInputChange("fullName", e.target.value)}
                       sx={inputStyles}
                       required
                       fullWidth
+                      aria-label="Full Name"
                     />
                     <TextField
-                      label="Work Email *"
+                      label="Work Email"
                       type="email"
                       value={formData.workEmail}
                       onChange={(e) => handleInputChange("workEmail", e.target.value)}
                       sx={inputStyles}
                       required
                       fullWidth
+                      aria-label="Work Email"
                     />
                   </Box>
 
                   {/* Company Information */}
                   <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 3 }}>
                     <TextField
-                      label="Company Name *"
+                      label="Company Name"
                       value={formData.companyName}
                       onChange={(e) => handleInputChange("companyName", e.target.value)}
                       sx={inputStyles}
                       required
                       fullWidth
+                      aria-label="Company Name"
                     />
                     <TextField
-                      label="Job Title *"
+                      label="Job Title"
                       value={formData.jobTitle}
                       onChange={(e) => handleInputChange("jobTitle", e.target.value)}
                       sx={inputStyles}
                       required
                       fullWidth
+                      aria-label="Job Title"
                     />
                   </Box>
 
@@ -622,29 +641,27 @@ const BookDemoForm = ({ open, onClose }) => {
                   <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 3 }}>
                     <Box>
                       <TextField
-                        label="Phone Number *"
+                        label="Phone Number"
                         type="tel"
                         value={formData.phoneNumber}
-                        onChange={(e) =>
-                          handleInputChange("phoneNumber", e.target.value.replace(/\D/g, "").slice(0, 10))
-                        }
+                        onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
                         sx={inputStyles}
                         required
                         fullWidth
+                        aria-label="Phone Number"
                       />
                       <Typography sx={{ color: "rgba(216, 180, 254, 0.8)", fontSize: "0.8rem", mt: 1 }}>
                         {formData.phoneNumber.length}/10 digits
                       </Typography>
                     </Box>
                     <FormControl fullWidth>
-                      <InputLabel sx={labelStyles}>Industry Type *</InputLabel>
+                      <InputLabel sx={labelStyles}>Industry Type</InputLabel>
                       <Select
                         value={formData.industryType}
                         onChange={(e) => handleInputChange("industryType", e.target.value)}
-                        sx={{...selectStyles,
-
-                        }}
+                        sx={selectStyles}
                         required
+                        aria-label="Industry Type"
                       >
                         <MenuItem value="" disabled>
                           Select your industry
@@ -661,24 +678,26 @@ const BookDemoForm = ({ open, onClose }) => {
                   {/* Other Industry Input */}
                   {formData.industryType === "Other" && (
                     <TextField
-                      label="Please specify your industry *"
+                      label="Please specify your industry"
                       value={formData.otherIndustry}
                       onChange={(e) => handleInputChange("otherIndustry", e.target.value)}
                       sx={inputStyles}
                       required
                       fullWidth
+                      aria-label="Other Industry"
                     />
                   )}
 
                   {/* Company Size & Communication Needs */}
                   <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 3 }}>
                     <FormControl fullWidth>
-                      <InputLabel sx={labelStyles}>Number of Employees *</InputLabel>
+                      <InputLabel sx={labelStyles}>Number of Employees</InputLabel>
                       <Select
                         value={formData.numberOfEmployees}
                         onChange={(e) => handleInputChange("numberOfEmployees", e.target.value)}
                         sx={selectStyles}
                         required
+                        aria-label="Number of Employees"
                       >
                         <MenuItem value="" disabled>
                           Select company size
@@ -691,12 +710,13 @@ const BookDemoForm = ({ open, onClose }) => {
                       </Select>
                     </FormControl>
                     <FormControl fullWidth>
-                      <InputLabel sx={labelStyles}>Primary Communication Need *</InputLabel>
+                      <InputLabel sx={labelStyles}>Primary Communication Need</InputLabel>
                       <Select
                         value={formData.communicationNeeds}
                         onChange={(e) => handleInputChange("communicationNeeds", e.target.value)}
                         sx={selectStyles}
                         required
+                        aria-label="Primary Communication Need"
                       >
                         <MenuItem value="" disabled>
                           Select primary need
@@ -712,12 +732,13 @@ const BookDemoForm = ({ open, onClose }) => {
 
                   {/* How did you hear about us */}
                   <FormControl fullWidth>
-                    <InputLabel sx={labelStyles}>How did you hear about us? *</InputLabel>
+                    <InputLabel sx={labelStyles}>How did you hear about us?</InputLabel>
                     <Select
                       value={formData.howDidYouHearAboutUs}
                       onChange={(e) => handleInputChange("howDidYouHearAboutUs", e.target.value)}
                       sx={selectStyles}
                       required
+                      aria-label="How did you hear about us?"
                     >
                       <MenuItem value="" disabled>
                         Select how you found us
@@ -740,12 +761,12 @@ const BookDemoForm = ({ open, onClose }) => {
                           color: "rgba(139, 92, 246, 0.4)",
                           "&.Mui-checked": { color: "#8B5CF6" },
                         }}
-                        required
+                        // required
                       />
                     }
                     label={
-                      <Typography sx={{ color: "rgba(216, 180, 254, 0.8)", fontSize: "0.9rem" }}>
-                        I agree to be contacted by Communication - Chat for demo scheduling and product updates. *
+                      <Typography sx={{ color: "rgba(216, 180, 254, 0.8)", fontSize: "0.9rem", }}>
+                        I agree to be contacted by Communication - Chat for demo scheduling and product updates.
                       </Typography>
                     }
                     sx={{
@@ -822,24 +843,24 @@ const BookDemoForm = ({ open, onClose }) => {
               </Box>
             )}
           </Box>
-        </Box>
 
-        <Snackbar
-          open={snackbar.open}
-          autoHideDuration={6000}
-          onClose={handleSnackbarClose}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        >
-          <Alert
+          <Snackbar
+            open={snackbar.open}
+            autoHideDuration={6000}
             onClose={handleSnackbarClose}
-            severity={snackbar.severity}
-            sx={{ width: "100%", borderRadius: 2 }}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           >
-            {snackbar.message}
-          </Alert>
-        </Snackbar>
+            <Alert
+              onClose={handleSnackbarClose}
+              severity={snackbar.severity}
+              sx={{ width: "100%", borderRadius: 2 }}
+            >
+              {snackbar.message}
+            </Alert>
+          </Snackbar>
+        </Box>
       </Box>
-    </Box>
+    </Modal>
   )
 }
 

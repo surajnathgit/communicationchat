@@ -1,6 +1,9 @@
-import { Card, CardContent, Box, Typography, Grid } from "@mui/material";
-import { Bolt, TrendingUp, AccessTime, Lightbulb, FormatQuote } from "@mui/icons-material";
-import ParticleBackground from "./particle-background";
+"use client"
+
+import { Card, CardContent, Box, Typography, Grid } from "@mui/material"
+import { Bolt, TrendingUp, AccessTime, Lightbulb } from "@mui/icons-material"
+import ParticleBackground from "./particle-background"
+import ScrollAnimation from "./scroll-animation"
 
 export default function WhyChooseUsSection() {
   const benefits = [
@@ -28,22 +31,7 @@ export default function WhyChooseUsSection() {
       description: "faster decision-making",
       color: "linear-gradient(to right, #c084fc, #ec4899)",
     },
-  ];
-
-  const testimonials = [
-    {
-      quote: "Communication - Chat transformed our team's productivity. The AI features are game-changing!",
-      author: "Sarah Johnson",
-      position: "CTO, TechCorp",
-      avatar: "SJ",
-    },
-    {
-      quote: "The security features give us peace of mind when handling sensitive client data.",
-      author: "Michael Chen",
-      position: "IT Director, FinanceFlow",
-      avatar: "MC",
-    },
-  ];
+  ]
 
   return (
     <Box
@@ -65,173 +53,154 @@ export default function WhyChooseUsSection() {
           zIndex: 10,
         }}
       >
-        <Box sx={{ textAlign: "center", mb: 8 }}>
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: { xs: "2.25rem", md: "3rem" },
-              fontWeight: 700,
-              color: "#fff",
-              mb: 3,
-            }}
-          >
-            Why Choose
-            <Box
-              component="span"
+        <ScrollAnimation direction="up" distance={50} duration={0.8} delay={0.1} triggerOnce={false}>
+          <Box sx={{ textAlign: "center", mb: 8 }}>
+            <Typography
+              variant="h2"
               sx={{
-                background: "linear-gradient(to right, #c4b5fd, #f9a8d4)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                fontSize: { xs: "2.25rem", md: "3rem" },
+                fontWeight: 700,
+                color: "#fff",
+                mb: 3,
               }}
             >
-              {" "}
-              Communication - Chat?
-            </Box>
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: "1.25rem",
-              color: "#ede9fe",
-              maxWidth: 640,
-              mx: "auto",
-            }}
-          >
-            Join thousands of teams who have transformed their communication
-          </Typography>
-        </Box>
+              Why Choose
+              <Box
+                component="span"
+                sx={{
+                  background: "linear-gradient(to right, #c4b5fd, #f9a8d4)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                {" "}
+                Communication - Chat?
+              </Box>
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: "1.25rem",
+                color: "#ede9fe",
+                maxWidth: 640,
+                mx: "auto",
+              }}
+            >
+              Join thousands of teams who have transformed their communication
+            </Typography>
+          </Box>
+        </ScrollAnimation>
 
-        <Grid container spacing={3} sx={{ mb: 10 }} justifyContent={"center"}>
-          {benefits.map((benefit, index) => {
-            const IconComponent = benefit.icon;
-            return (
-              <Grid item xs={12} md={6} lg={3} key={index}>
-                <Card
-                  sx={{
-                    textAlign: "center",
-                    transition: "all 0.3s",
-                    "&:hover": {
-                      boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
-                    },
-                    border: "none",
-                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    backdropFilter: "blur(4px)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-
-                    width: 300,
-                    height: 300,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    display: "flex"
-                  }}
-                >
-                  <CardContent sx={{ p: 4 }}>
-                    <Box
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 10 }}>
+          <Grid container spacing={4} sx={{ maxWidth: 1200 }}>
+            {benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon
+              return (
+                <Grid item xs={12} sm={6} md={6} lg={3} key={index}>
+                  <ScrollAnimation
+                    direction="up"
+                    distance={100}
+                    duration={0.7}
+                    delay={index * 0.15}
+                    triggerOnce={false}
+                    threshold={0.2}
+                  >
+                    <Card
                       sx={{
-                        width: 64,
-                        height: 64,
-                        background: benefit.color,
-                        borderRadius: 2,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mx: "auto",
-                        mb: 2,
-                        transition: "transform 0.3s",
+                        width: "100%",
+                        minHeight: 320,
+                        textAlign: "center",
+                        transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                         "&:hover": {
-                          transform: "scale(1 Xie.1)",
+                          transform: "translateY(-15px) scale(1.05)",
+                          boxShadow: "0 25px 50px rgba(0, 0, 0, 0.4)",
+                          "& .benefit-icon": {
+                            transform: "scale(1.2) rotate(10deg)",
+                            background: benefit.color,
+                            boxShadow: "0 15px 30px rgba(139, 92, 246, 0.4)",
+                          },
+                          "& .benefit-stat": {
+                            transform: "scale(1.1)",
+                            textShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
+                          },
+                        },
+                        border: "none",
+                        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
+                        background: "rgba(255, 255, 255, 0.1)",
+                        backdropFilter: "blur(15px)",
+                        border: "1px solid rgba(255, 255, 255, 0.2)",
+                        borderRadius: 4,
+                        position: "relative",
+                        overflow: "hidden",
+                        "&::before": {
+                          content: '""',
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          height: "4px",
+                          background: benefit.color,
                         },
                       }}
                     >
-                      <IconComponent sx={{ fontSize: 32, color: "#fff" }} />
-                    </Box>
-                    <Typography
-                      sx={{ fontSize: "2.25rem", fontWeight: 700, color: "#fff", mb: 1 }}
-                    >
-                      {benefit.stat}
-                    </Typography>
-                    <Typography sx={{ color: "#e9d5ff", fontWeight: 500 }}>
-                      {benefit.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            );
-          })}
-        </Grid>
-
-        {/* <Box sx={{ textAlign: "center", mb: 6 }}>
-          <Typography
-            variant="h3"
-            sx={{ fontSize: "1.875rem", fontWeight: 700, color: "#fff", mb: 1 }}
-          >
-            What Our Customers Say
-          </Typography>
-          <Typography sx={{ color: "#e9d5ff" }}>
-            Real feedback from real users
-          </Typography>
+                      <CardContent
+                        sx={{
+                          p: 4,
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Box
+                          className="benefit-icon"
+                          sx={{
+                            width: 80,
+                            height: 80,
+                            background: benefit.color,
+                            borderRadius: 3,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            mx: "auto",
+                            mb: 3,
+                            transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                            boxShadow: "0 10px 25px rgba(139, 92, 246, 0.3)",
+                          }}
+                        >
+                          <IconComponent sx={{ fontSize: 40, color: "#fff" }} />
+                        </Box>
+                        <Typography
+                          className="benefit-stat"
+                          sx={{
+                            fontSize: "3rem",
+                            fontWeight: 800,
+                            color: "#fff",
+                            mb: 1,
+                            transition: "all 0.3s ease",
+                            textShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+                          }}
+                        >
+                          {benefit.stat}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            color: "#e9d5ff",
+                            fontWeight: 600,
+                            fontSize: "1.1rem",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {benefit.description}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </ScrollAnimation>
+                </Grid>
+              )
+            })}
+          </Grid>
         </Box>
-
-        <Grid container spacing={4} sx={{ maxWidth: 1024, mx: "auto" }}>
-          {testimonials.map((testimonial, index) => (
-            <Grid item xs={12} md={6} key={index}>
-              <Card
-                sx={{
-                  background: "rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(4px)",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
-                  transition: "all 0.3s",
-                  "&:hover": {
-                    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
-                  },
-                }}
-              >
-                <CardContent sx={{ p: 4 }}>
-                  <FormatQuote sx={{ fontSize: 32, color: "#c4b5fd", mb: 2 }} />
-                  <Typography
-                    component="blockquote"
-                    sx={{
-                      fontSize: "1.125rem",
-                      color: "#ede9fe",
-                      mb: 3,
-                      fontStyle: "italic",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    "{testimonial.quote}"
-                  </Typography>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                    <Box
-                      sx={{
-                        width: 48,
-                        height: 48,
-                        background: "linear-gradient(to right, #8b5cf6, #ec4899)",
-                        borderRadius: "50%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#fff",
-                        fontWeight: 700,
-                      }}
-                    >
-                      {testimonial.avatar}
-                    </Box>
-                    <Box>
-                      <Typography sx={{ fontWeight: 700, color: "#fff" }}>
-                        {testimonial.author}
-                      </Typography>
-                      <Typography sx={{ fontSize: "0.875rem", color: "#e9d5ff" }}>
-                        {testimonial.position}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid> */}
       </Box>
     </Box>
-  );
+  )
 }

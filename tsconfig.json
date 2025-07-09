@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/page.jsx", "src/app/contact/page.jsx", "src/app/components/header.jsx", "src/app/components/why-choose-us-section.jsx", "src/app/components/features-section.jsx", "src/app/layout.jsx", "src/app/components/about-section.jsx", "src/app/components/particle-background.jsx"  ],
+, "src/app/page.jsx", "src/app/contact/page.jsx", "src/app/commoncomponents/header.jsx", "src/app/components/why-choose-us-section.jsx", "src/app/components/features-section.jsx", "src/app/layout.jsx", "src/app/components/about-section.jsx", "src/app/components/particle-background.jsx", "src/app/demo/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

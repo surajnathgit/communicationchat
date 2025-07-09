@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Box, Container, Typography, Button, Drawer, IconButton, useTheme, useMediaQuery } from "@mui/material"
 import { Menu, Forum, Person, Event } from "@mui/icons-material"
 import Link from "next/link"
+import BookDemoForm from "./book-demo-form"
 
 export default function Header() {
   const [demoModalOpen, setDemoModalOpen] = useState(false)
@@ -15,6 +16,10 @@ export default function Header() {
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const onClose = () =>{
+    setDemoModalOpen(false)
+  }
 
   const navigationItems = [
     { label: "Home", href: "/" },
@@ -162,8 +167,6 @@ export default function Header() {
               }}
               startIcon={<Event sx={{ fontSize: 16 }} />}
               onClick={() => setDemoModalOpen(true)}
-              component={Link}
-              href="/bookdemo"
             >
               Book a Demo
             </Button>
@@ -249,8 +252,6 @@ export default function Header() {
                   background: "linear-gradient(to right, #a78bfa, #f472b6)",
                 },
               }}
-              component={Link}
-              href={"/bookdemo"}
               startIcon={<Event sx={{ fontSize: 16 }} />}
               onClick={() => {
                 setDemoModalOpen(true)
@@ -262,6 +263,7 @@ export default function Header() {
           </Box>
         </Box>
       </Drawer>
+      <BookDemoForm open={demoModalOpen} onClose={onClose}/>
     </>
   )
 }
