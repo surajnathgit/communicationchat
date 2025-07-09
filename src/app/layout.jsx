@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "SecureChat Pro - Enterprise Communication Platform",
   description:
-    "Revolutionize team communication with real-time secure chat, file sharing, video calls, and AI-powered features.",
+    "Revolutionize team communication with real-time secure chat, file sharing, video calls, and AI-powered features",
   generator: "v0.dev",
 }
 

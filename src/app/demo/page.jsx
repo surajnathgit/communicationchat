@@ -148,6 +148,7 @@ function ProductDemo() {
                 backdropFilter: "blur(4px)",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
                 mb: 8,
+                borderRadius:30
               }}
             >
               <CardContent sx={{ p: 0 }}>

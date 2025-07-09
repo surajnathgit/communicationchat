@@ -162,6 +162,8 @@ export default function Header() {
               }}
               startIcon={<Event sx={{ fontSize: 16 }} />}
               onClick={() => setDemoModalOpen(true)}
+              component={Link}
+              href="/bookdemo"
             >
               Book a Demo
             </Button>
@@ -247,6 +249,8 @@ export default function Header() {
                   background: "linear-gradient(to right, #a78bfa, #f472b6)",
                 },
               }}
+              component={Link}
+              href={"/bookdemo"}
               startIcon={<Event sx={{ fontSize: 16 }} />}
               onClick={() => {
                 setDemoModalOpen(true)
