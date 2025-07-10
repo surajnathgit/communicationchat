@@ -20,7 +20,7 @@ import {
 } from "@mui/material"
 import { CheckCircle, Close, Star, People, FlashOn } from "@mui/icons-material"
 import ParticleBackground from "../components/particle-background"
-import {submitDemoRequest} from "../apis/apis"
+import { submitDemoRequest } from "../apis/apis"
 
 const BookDemoForm = ({ open, onClose }) => {
   const [loading, setLoading] = useState(false)
@@ -41,27 +41,26 @@ const BookDemoForm = ({ open, onClose }) => {
   })
 
   // Hide navbar and footer when form is open
-useEffect(() => {
-  const navbar = document.querySelector("nav")
-  const footer = document.querySelector("footer")
+  useEffect(() => {
+    const navbar = document.querySelector("nav")
+    const footer = document.querySelector("footer")
 
-  if (open) {
-    document.body.classList.add("no-scroll")
-    if (navbar) navbar.style.display = "none"
-    if (footer) footer.style.display = "none"
-  } else {
-    document.body.classList.remove("no-scroll")
-    if (navbar) navbar.style.display = ""
-    if (footer) footer.style.display = ""
-  }
+    if (open) {
+      document.body.classList.add("no-scroll")
+      if (navbar) navbar.style.display = "none"
+      if (footer) footer.style.display = "none"
+    } else {
+      document.body.classList.remove("no-scroll")
+      if (navbar) navbar.style.display = ""
+      if (footer) footer.style.display = ""
+    }
 
-  return () => {
-    document.body.classList.remove("no-scroll")
-    if (navbar) navbar.style.display = ""
-    if (footer) footer.style.display = ""
-  }
-}, [open])
-
+    return () => {
+      document.body.classList.remove("no-scroll")
+      if (navbar) navbar.style.display = ""
+      if (footer) footer.style.display = ""
+    }
+  }, [open])
 
   // Industry options
   const industryOptions = [
@@ -108,15 +107,13 @@ useEffect(() => {
   ]
 
   const sanitizeInput = (input) => {
-    return input.replace(/[<>{}]/g, "") // Basic sanitization to remove potentially harmful characters
+    return input.replace(/[<>{}]/g, "")
   }
 
   const handleInputChange = (field, value) => {
     if (field === "phoneNumber") {
-      // Allow only numeric input for phone number
       value = value.replace(/\D/g, "").slice(0, 10)
     } else if (typeof value === "string") {
-      // Sanitize text inputs
       value = sanitizeInput(value)
     }
     setFormData((prev) => ({
@@ -224,9 +221,7 @@ useEffect(() => {
         throw new Error(resp.message || "Failed to submit demo request")
       }
 
-      console.log("Demo request submitted:", resp)
       setShowThankYou(true)
-
       setSnackbar({
         open: true,
         message: resp.message || "We'll contact you shortly to schedule your demo.",
@@ -282,68 +277,81 @@ useEffect(() => {
     }
   }
 
-  // Common styles for TextField and Select
-  const inputStyles = {
-    "& .MuiOutlinedInput-root": {
-      borderRadius: 2,
-      backgroundColor: "rgba(30, 41, 59, 0.5)",
-      border: "1px solid rgba(139, 92, 246, 0.3)",
-      color: "white",
-      "&:hover": {
-        "& .MuiOutlinedInput-notchedOutline": {
-          borderColor: "rgba(139, 92, 246, 0.5)",
-        },
-      },
-      "&.Mui-focused": {
-        "& .MuiOutlinedInput-notchedOutline": {
-          borderColor: "#8B5CF6",
-          borderWidth: "2px",
-        },
-      },
+const inputStyles = {
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "8px",
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    border: "1px solid rgba(147, 51, 234, 0.4)",
+    color: "#E2E8F0",
+    transition: "all 0.3s ease",
+    "&:hover": {
       "& .MuiOutlinedInput-notchedOutline": {
-        border: "none",
-      },
-      "& .MuiOutlinedInput-input": {
-        padding: "14px 16px",
-        fontSize: "0.95rem",
+        borderColor: "rgba(147, 51, 234, 0.6)",
       },
     },
-    "& .MuiInputLabel-root": {
-      color: "rgba(255, 255, 255, 0.7)",
-      fontSize: "0.95rem",
-      "&.Mui-focused": {
-        color: "#8B5CF6",
-      },
-      "&.MuiFormLabel-filled": {
-        color: "#8B5CF6",
-      },
-    },
-  }
-
-  const selectStyles = {
-    color:"white",
-    borderRadius: 2,
-    backgroundColor: "rgba(30, 41, 59, 0.5)",
-    border: "1px solid rgba(139, 92, 246, 0.3)",
-    "& .MuiSelect-select": {
-      padding: "14px 16px",
-      fontSize: "0.95rem",
-    },
-    "& .MuiSelect-icon": {
-      color: "rgba(255, 255, 255, 0.7)",
-    },
-  }
-
-  const labelStyles = {
-    color: "rgba(255, 255, 255, 0.7)",
-    fontSize: "0.95rem",
     "&.Mui-focused": {
-      color: "#8B5CF6",
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#9333EA",
+        borderWidth: "2px",
+      },
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      border: "none",
+    },
+    "& .MuiOutlinedInput-input": {
+      padding: "12px 16px",
+      fontSize: "0.9rem",
+    },
+  },
+  "& .MuiInputLabel-root": {
+    color: "#FFFFFF", 
+    fontSize: "0.9rem",
+    "&.Mui-focused": {
+      color: "#FFFFFF", 
     },
     "&.MuiFormLabel-filled": {
-      color: "#8B5CF6",
+      color: "#FFFFFF",
+    },
+  },
+}
+
+
+  const selectStyles = {
+    color: "#E2E8F0",
+    borderRadius: "8px",
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    border: "1px solid rgba(147, 51, 234, 0.4)",
+    transition: "all 0.3s ease",
+    "& .MuiSelect-select": {
+      padding: "12px 16px",
+      fontSize: "0.9rem",
+    },
+    "& .MuiSelect-icon": {
+      color: "rgba(203, 213, 225, 0.7)",
+    },
+    "&:hover": {
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "rgba(147, 51, 234, 0.6)",
+      },
+    },
+    "&.Mui-focused": {
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#9333EA",
+        borderWidth: "2px",
+      },
     },
   }
+
+const labelStyles = {
+  color: "#FFFFFF", 
+  fontSize: "0.9rem",
+  "&.Mui-focused": {
+    color: "#FFFFFF",
+  },
+  "&.MuiFormLabel-filled": {
+    color: "#FFFFFF", 
+  },
+}
 
   return (
     <Modal
@@ -356,36 +364,38 @@ useEffect(() => {
         justifyContent: "center",
         alignItems: "center",
         bgcolor: "transparent",
+        backdropFilter: "blur(8px)",
       }}
     >
       <Box
         sx={{
           position: "relative",
-          maxWidth: 800,
+          maxWidth: 720,
           width: "100%",
-          maxHeight: "100vh",
+          maxHeight: "90vh",
           overflowY: "auto",
           bgcolor: "transparent",
-          background: "linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%)",
-          borderRadius: 2,
+          background: "linear-gradient(145deg, #1E293B 0%, #2D3748 100%)",
+          borderRadius: "12px",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
           "&::-webkit-scrollbar": {
             display: "none",
           },
           scrollbarWidth: "none",
           msOverflowStyle: "none",
-          pt:{xs:"4rem", sm:"4rem",md:"0rem", lg:"0rem"},
-          pb:"2rem"
+          // pt: { xs: "3rem", sm: "3rem", md: "2rem", lg: "2rem" },
+          // pb: "2rem",
         }}
       >
-        <Box sx={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        <Box sx={{ position: "absolute", inset: 0, overflow: "hidden", opacity: 0.6 }}>
           <ParticleBackground
-            count={150}
-            colors={["#8B5CF6", "#A855F7", "#C084FC", "#DDD6FE", "#60A5FA", "#FBBF24"]}
-            minSize={1.5}
-            maxSize={5}
-            speed={0.5}
+            count={100}
+            colors={["#9333EA", "#D8B4FE", "#A855F7", "#F3E8FF", "#8B5CF6"]}
+            minSize={1}
+            maxSize={4}
+            speed={0.3}
             connected={true}
-            opacity={0.8}
+            opacity={0.7}
           />
         </Box>
         <Box sx={{ position: "relative", zIndex: 10, maxHeight: "100%" }}>
@@ -395,10 +405,11 @@ useEffect(() => {
               disabled={loading}
               sx={{
                 position: "absolute",
-                right: 16,
-                top: 16,
-                color: "rgba(255, 255, 255, 0.7)",
+                right: 12,
+                top: 12,
+                color: "rgba(203, 213, 225, 0.7)",
                 "&:hover": { bgcolor: "rgba(255, 255, 255, 0.1)" },
+                transition: "all 0.3s ease",
               }}
             >
               <Close />
@@ -406,19 +417,19 @@ useEffect(() => {
             <Box
               sx={{
                 textAlign: "center",
-                pr: 8,
-                color: "white",
-                fontSize: "2rem",
+                pr: 6,
+                color: "#E2E8F0",
+                fontSize: { xs: "1.5rem", md: "2rem" },
                 fontWeight: 700,
               }}
             >
               {showThankYou ? (
-                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 1.5 }}>
                   <Box sx={{ position: "relative" }}>
-                    <CheckCircle sx={{ fontSize: 32, color: "#34D399" }} />
+                    <CheckCircle sx={{ fontSize: 28, color: "#34D399" }} />
                     <CheckCircle
                       sx={{
-                        fontSize: 32,
+                        fontSize: 28,
                         color: "#34D399",
                         opacity: 0.3,
                         position: "absolute",
@@ -436,18 +447,19 @@ useEffect(() => {
                       background: "linear-gradient(to right, #34D399, #10B981)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
+                      fontSize: "inherit",
                     }}
                   >
                     Thank You, {formData.fullName}!
                   </Typography>
                 </Box>
               ) : (
-                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 1.5 }}>
                   <Box sx={{ position: "relative" }}>
-                    <CheckCircle sx={{ fontSize: 32, color: "#8B5CF6" }} />
+                    <CheckCircle sx={{ fontSize: 28, color: "#9333EA" }} />
                     <Star
                       sx={{
-                        fontSize: 16,
+                        fontSize: 14,
                         color: "#FBBF24",
                         position: "absolute",
                         top: -4,
@@ -463,9 +475,10 @@ useEffect(() => {
                   </Box>
                   <Typography
                     sx={{
-                      background: "linear-gradient(to right, #8B5CF6, #EC4899, #3B82F6)",
+                      background: "linear-gradient(to right, #9333EA, #A855F7, #D8B4FE)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
+                      fontSize: "inherit",
                     }}
                   >
                     Book Your Demo
@@ -480,14 +493,15 @@ useEffect(() => {
               <Box
                 sx={{
                   p: 4,
-                  bgcolor: "rgba(20, 83, 45, 0.2)",
-                  border: "1px solid rgba(52, 211, 153, 0.3)",
-                  borderRadius: 2,
-                  backdropFilter: "blur(4px)",
+                  bgcolor: "rgba(20, 83, 45, 0.15)",
+                  border: "1px solid rgba(52, 211, 153, 0.2)",
+                  borderRadius: "8px",
+                  backdropFilter: "blur(6px)",
                   textAlign: "center",
+                  transition: "all 0.3s ease",
                 }}
               >
-                <Box sx={{ position: "relative", mb: 4 }}>
+                <Box sx={{ position: "relative", mb: 3 }}>
                   <Box
                     sx={{
                       position: "absolute",
@@ -499,38 +513,37 @@ useEffect(() => {
                   >
                     <Box
                       sx={{
-                        width: 128,
-                        height: 128,
-                        bgcolor: "rgba(52, 211, 153, 0.2)",
+                        width: 100,
+                        height: 100,
+                        bgcolor: "rgba(52, 211, 153, 0.15)",
                         borderRadius: "50%",
                         animation: "pulse 3s infinite",
                         "@keyframes pulse": {
-                          "0%": { transform: "scale(1)", opacity: 0.5 },
-                          "50%": { transform: "scale(1.1)", opacity: 0.3 },
-                          "100%": { transform: "scale(1)", opacity: 0.5 },
+                          "0%": { transform: "scale(1)", opacity: 0.4 },
+                          "50%": { transform: "scale(1.1)", opacity: 0.2 },
+                          "100%": { transform: "scale(1)", opacity: 0.4 },
                         },
                       }}
                     />
                   </Box>
-                  <CheckCircle sx={{ fontSize: 80, color: "#34D399", position: "relative", zIndex: 10 }} />
+                  <CheckCircle sx={{ fontSize: 64, color: "#34D399", position: "relative", zIndex: 10 }} />
                 </Box>
                 <Typography variant="h5" sx={{ color: "#34D399", mb: 2, fontWeight: 600 }}>
                   Demo Request Received!
                 </Typography>
-                <Typography sx={{ color: "rgba(209, 250, 229, 0.8)", mb: 4, fontSize: "1.1rem" }}>
-                  Thank you for your interest in Communication - Chat. Our team will contact you within 24 hours to
-                  schedule your personalized demo.
+                <Typography sx={{ color: "rgba(209, 250, 229, 0.9)", mb: 3, fontSize: "1rem" }}>
+                  Thank you for your interest in Communication - Chat. Our team will contact you within 24 hours to schedule your personalized demo.
                 </Typography>
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center", mb: 4 }}>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, color: "rgba(167, 243, 208, 0.8)" }}>
-                    <People sx={{ fontSize: 20 }} />
-                    <Typography sx={{ fontSize: "0.95rem" }}>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, alignItems: "center", mb: 3 }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, color: "rgba(167, 243, 208, 0.9)" }}>
+                    <People sx={{ fontSize: 18 }} />
+                    <Typography sx={{ fontSize: "0.9rem" }}>
                       Our experts will show you how to transform your team's communication
                     </Typography>
                   </Box>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, color: "rgba(167, 243, 208, 0.8)" }}>
-                    <FlashOn sx={{ fontSize: 20 }} />
-                    <Typography sx={{ fontSize: "0.95rem" }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, color: "rgba(167, 243, 208, 0.9)" }}>
+                    <FlashOn sx={{ fontSize: 18 }} />
+                    <Typography sx={{ fontSize: "0.9rem" }}>
                       Get ready to boost your productivity by 40%
                     </Typography>
                   </Box>
@@ -540,26 +553,27 @@ useEffect(() => {
               <Box
                 sx={{
                   p: 4,
-                  bgcolor: "rgba(30, 41, 59, 0.3)",
-                  border: "1px solid rgba(139, 92, 246, 0.3)",
-                  borderRadius: 2,
-                  backdropFilter: "blur(4px)",
+                  bgcolor: "rgba(255, 255, 255, 0.03)",
+                  border: "1px solid rgba(147, 51, 234, 0.2)",
+                  borderRadius: "8px",
+                  backdropFilter: "blur(6px)",
+                  transition: "all 0.3s ease",
                 }}
               >
-                <Box sx={{ textAlign: "center", mb: 4 }}>
-                  <Typography variant="h6" sx={{ color: "white", mb: 1, fontWeight: 600 }}>
+                <Box sx={{ textAlign: "center", mb: 3 }}>
+                  <Typography variant="h6" sx={{ color: "#E2E8F0", mb: 1, fontWeight: 600 }}>
                     Schedule Your Personal Demo
                   </Typography>
-                  <Typography sx={{ color: "rgba(216, 180, 254, 0.8)", fontSize: "1.1rem" }}>
+                  <Typography sx={{ color: "rgba(203, 213, 225, 0.9)", fontSize: "1rem" }}>
                     Discover how Communication - Chat can enhance your team's collaboration
                   </Typography>
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: "center",
-                      gap: 4,
-                      mt: 3,
-                      color: "rgba(216, 180, 254, 0.8)",
+                      gap: 3,
+                      mt: 2,
+                      color: "rgba(203, 213, 225, 0.9)",
                     }}
                   >
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -579,7 +593,7 @@ useEffect(() => {
                         sx={{
                           width: 8,
                           height: 8,
-                          bgcolor: "#3B82F6",
+                          bgcolor: "#9333EA",
                           borderRadius: "50%",
                           animation: "pulse 2s infinite",
                         }}
@@ -591,7 +605,7 @@ useEffect(() => {
                         sx={{
                           width: 8,
                           height: 8,
-                          bgcolor: "#8B5CF6",
+                          bgcolor: "#D8B4FE",
                           borderRadius: "50%",
                           animation: "pulse 2s infinite",
                         }}
@@ -600,9 +614,8 @@ useEffect(() => {
                     </Box>
                   </Box>
                 </Box>
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-                  {/* Personal Information */}
-                  <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 3 }}>
+                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                  <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2.5 }}>
                     <TextField
                       label="Full Name"
                       value={formData.fullName}
@@ -623,9 +636,7 @@ useEffect(() => {
                       aria-label="Work Email"
                     />
                   </Box>
-
-                  {/* Company Information */}
-                  <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 3 }}>
+                  <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2.5 }}>
                     <TextField
                       label="Company Name"
                       value={formData.companyName}
@@ -645,9 +656,7 @@ useEffect(() => {
                       aria-label="Job Title"
                     />
                   </Box>
-
-                  {/* Contact & Industry */}
-                  <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 3 }}>
+                  <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2.5 }}>
                     <Box>
                       <TextField
                         label="Phone Number"
@@ -659,7 +668,7 @@ useEffect(() => {
                         fullWidth
                         aria-label="Phone Number"
                       />
-                      <Typography sx={{ color: "rgba(216, 180, 254, 0.8)", fontSize: "0.8rem", mt: 1 }}>
+                      <Typography sx={{ color: "rgba(203, 213, 225, 0.7)", fontSize: "0.8rem", mt: 0.5 }}>
                         {formData.phoneNumber.length}/10 digits
                       </Typography>
                     </Box>
@@ -683,8 +692,6 @@ useEffect(() => {
                       </Select>
                     </FormControl>
                   </Box>
-
-                  {/* Other Industry Input */}
                   {formData.industryType === "Other" && (
                     <TextField
                       label="Please specify your industry"
@@ -696,9 +703,7 @@ useEffect(() => {
                       aria-label="Other Industry"
                     />
                   )}
-
-                  {/* Company Size & Communication Needs */}
-                  <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 3 }}>
+                  <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2.5 }}>
                     <FormControl fullWidth>
                       <InputLabel sx={labelStyles}>Number of Employees</InputLabel>
                       <Select
@@ -738,8 +743,6 @@ useEffect(() => {
                       </Select>
                     </FormControl>
                   </Box>
-
-                  {/* How did you hear about us */}
                   <FormControl fullWidth>
                     <InputLabel sx={labelStyles}>How did you hear about us?</InputLabel>
                     <Select
@@ -759,49 +762,45 @@ useEffect(() => {
                       ))}
                     </Select>
                   </FormControl>
-
-                  {/* Consent Checkbox */}
                   <FormControlLabel
                     control={
                       <Checkbox
                         checked={formData.consent}
                         onChange={(e) => handleInputChange("consent", e.target.checked)}
                         sx={{
-                          color: "rgba(139, 92, 246, 0.4)",
-                          "&.Mui-checked": { color: "#8B5CF6" },
+                          color: "rgba(147, 51, 234, 0.4)",
+                          "&.Mui-checked": { color: "#9333EA" },
                         }}
-                        // required
                       />
                     }
                     label={
-                      <Typography sx={{ color: "rgba(216, 180, 254, 0.8)", fontSize: "0.9rem", }}>
+                      <Typography sx={{ color: "rgba(203, 213, 225, 0.9)", fontSize: "0.85rem" }}>
                         I agree to be contacted by Communication - Chat for demo scheduling and product updates.
                       </Typography>
                     }
                     sx={{
-                      bgcolor: "rgba(30, 41, 59, 0.3)",
-                      p: 2,
-                      borderRadius: 2,
-                      border: "1px solid rgba(139, 92, 246, 0.2)",
+                      bgcolor: "rgba(255, 255, 255, 0.03)",
+                      p: 1.5,
+                      borderRadius: "8px",
+                      border: "1px solid rgba(147, 51, 234, 0.2)",
                     }}
                   />
-
-                  {/* Submit Button */}
                   <Button
                     type="submit"
                     variant="contained"
                     disabled={loading}
                     sx={{
-                      py: 2,
-                      borderRadius: 2,
-                      background: "linear-gradient(to right, #8B5CF6, #3B82F6)",
-                      color: "white",
-                      fontSize: "1rem",
+                      py: 1.5,
+                      borderRadius: "8px",
+                      background: "linear-gradient(to right, #9333EA, #A855F7)",
+                      color: "#F3F4F6",
+                      fontSize: "0.95rem",
                       fontWeight: 600,
+                      textTransform: "none",
                       "&:hover": {
-                        background: "linear-gradient(to right, #7C3AED, #2563EB)",
-                        transform: "scale(1.02)",
-                        transition: "all 0.3s",
+                        background: "linear-gradient(to right, #7E22CE, #9333EA)",
+                        transform: "translateY(-2px)",
+                        transition: "all 0.3s ease",
                       },
                       "&:disabled": {
                         bgcolor: "rgba(100, 116, 139, 0.3)",
@@ -809,30 +808,29 @@ useEffect(() => {
                       },
                       display: "flex",
                       gap: 1,
+                      boxShadow: "0 4px 12px rgba(147, 51, 234, 0.3)",
                     }}
                   >
                     {loading ? (
                       <>
-                        <CircularProgress size={20} color="inherit" />
+                        <CircularProgress size={18} color="inherit" />
                         Booking Your Demo...
                       </>
                     ) : (
                       <>
-                        <CheckCircle sx={{ fontSize: 20 }} />
+                        <CheckCircle sx={{ fontSize: 18 }} />
                         Book My Demo Now
-                        <Star sx={{ fontSize: 16 }} />
+                        <Star sx={{ fontSize: 14 }} />
                       </>
                     )}
                   </Button>
-
-                  {/* Trust Indicators */}
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: "center",
-                      gap: 4,
-                      pt: 3,
-                      color: "rgba(216, 180, 254, 0.8)",
+                      gap: 3,
+                      pt: 2,
+                      color: "rgba(203, 213, 225, 0.9)",
                     }}
                   >
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -840,11 +838,11 @@ useEffect(() => {
                       <Typography sx={{ fontSize: "0.85rem" }}>Secure & Private</Typography>
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      <Box sx={{ width: 8, height: 8, bgcolor: "#3B82F6", borderRadius: "50%" }} />
+                      <Box sx={{ width: 8, height: 8, bgcolor: "#9333EA", borderRadius: "50%" }} />
                       <Typography sx={{ fontSize: "0.85rem" }}>No Spam</Typography>
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      <Box sx={{ width: 8, height: 8, bgcolor: "#8B5CF6", borderRadius: "50%" }} />
+                      <Box sx={{ width: 8, height: 8, bgcolor: "#D8B4FE", borderRadius: "50%" }} />
                       <Typography sx={{ fontSize: "0.85rem" }}>Free Demo</Typography>
                     </Box>
                   </Box>
@@ -862,7 +860,12 @@ useEffect(() => {
             <Alert
               onClose={handleSnackbarClose}
               severity={snackbar.severity}
-              sx={{ width: "100%", borderRadius: 2 }}
+              sx={{
+                width: "100%",
+                borderRadius: "8px",
+                bgcolor: snackbar.severity === "success" ? "rgba(20, 83, 45, 0.9)" : "rgba(127, 29, 29, 0.9)",
+                color: "#F3F4F6",
+              }}
             >
               {snackbar.message}
             </Alert>

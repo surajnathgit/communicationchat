@@ -10,25 +10,36 @@ export default function Footer() {
       sx={{
         background: "linear-gradient(135deg, rgba(76, 29, 149, 0.95) 0%, rgba(91, 33, 182, 0.95) 50%, rgba(49, 46, 129, 0.95) 100%)",
         color: "#fff",
-        pt: 8,
-        pb:4
+        pt: { xs: 3, sm: 4, md: 6 },
+        pb: { xs: 2, sm: 3 },
       }}
     >
       <Container
         maxWidth={false}
         sx={{
-          px: 2,
+          px: { xs: 2, sm: 2.5, md: 3 },
         }}
       >
-        <Grid container spacing={4} sx={{display:"flex", gap: { xs: 3, md: "10rem" }, justifyContent:"center"}}>
+        <Grid
+          container
+          spacing={{ xs: 1.5, sm: 2, md: 3 }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: { xs: "column", sm:"column", md:"row", lg:"row" },
+            alignItems: { xs: "center", sm: "center" },
+            textAlign: { xs: "center", sm: "center",md:"left" },
+            gap:{ xs: "1rem", sm:"1rem", md:"6rem", lg:"6rem" },
+          }}
+        >
           {/* Product Logo and Copyright */}
-          <Grid item xs={12} md={3}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, alignItems: { xs: "center", sm: "flex-start" } }}>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <Box
                   sx={{
-                    width: 32,
-                    height: 32,
+                    width: { xs: 28, sm: 32 },
+                    height: { xs: 28, sm: 32 },
                     background: "linear-gradient(to right, #c4b5fd, #f9a8d4)",
                     borderRadius: 1,
                     display: "flex",
@@ -36,94 +47,69 @@ export default function Footer() {
                     justifyContent: "center",
                   }}
                 >
-                  <Forum sx={{ fontSize: 20, color: "#fff" }} />
+                  <Forum sx={{ fontSize: { xs: 18, sm: 20 }, color: "#fff" }} />
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                <Typography variant="h6" sx={{ fontWeight: 700, fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" } }}>
                   Communication - Chat
                 </Typography>
               </Box>
-              {/* <Typography sx={{ color: "#9ca3af", fontSize: "0.875rem" }}>
-                © {currentYear} Communication - Chat. All rights reserved.
-              </Typography> */}
             </Box>
           </Grid>
 
           {/* Quick Links */}
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography variant="h6" sx={{ fontWeight: 600, mb: { xs: 1, sm: 1.5 }, fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" } }}>
               Quick Links
             </Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 0.75 }}>
               <Link
                 href="/"
                 sx={{
                   color: "#9ca3af",
                   textDecoration: "none",
-                  fontSize: "0.875rem",
+                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "0.875rem" },
                   "&:hover": { color: "#fff" },
                 }}
               >
                 Home
               </Link>
-              {/* <Link
-                href="/about"
-                sx={{
-                  color: "#9ca3af",
-                  textDecoration: "none",
-                  fontSize: "0.875rem",
-                  "&:hover": { color: "#fff" },
-                }}
-              >
-                About
-              </Link> */}
               <Link
                 href="/demo"
                 sx={{
                   color: "#9ca3af",
                   textDecoration: "none",
-                  fontSize: "0.875rem",
+                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "0.875rem" },
                   "&:hover": { color: "#fff" },
                 }}
               >
                 Product Demo
               </Link>
-              {/* <Link
-                // href="/contact"
-                sx={{
-                  color: "#9ca3af",
-                  textDecoration: "none",
-                  fontSize: "0.875rem",
-                  "&:hover": { color: "#fff" },
-                }}
-              >
-                Contact Us
-              </Link> */}
             </Box>
           </Grid>
 
           {/* Policies */}
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography variant="h6" sx={{ fontWeight: 600, mb: { xs: 1, sm: 1.5 }, fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" } }}>
               Legal
             </Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 0.75 }}>
               <Link
-                // href="/privacy"
+                href="/privacy"
                 sx={{
                   color: "#9ca3af",
                   textDecoration: "none",
-                  fontSize: "0.875rem",
+                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "0.875rem" },
                   "&:hover": { color: "#fff" },
                 }}
               >
                 Privacy Policy
               </Link>
               <Link
-                // href="/terms"
+                href="/terms"
                 sx={{
                   color: "#9ca3af",
                   textDecoration: "none",
-                  fontSize: "0.875rem",
+                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "0.875rem" },
                   "&:hover": { color: "#fff" },
                 }}
               >
@@ -133,15 +119,15 @@ export default function Footer() {
           </Grid>
 
           {/* Social Media */}
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6" sx={{ fontWeight: 600, mb:{xs:0, md:2, sm:4}  }}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography variant="h6" sx={{ fontWeight: 600, mb: { xs: 1, sm: 1.5 }, fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" } }}>
               Follow Us
             </Typography>
-            <Box sx={{ display: "flex", gap: 2 }}>
+            <Box sx={{ display: "flex", gap: { xs: 1, sm: 1.5, md: 2 }, justifyContent: { xs: "center", sm: "flex-start" } }}>
               <Link href="#" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
                 <X
                   sx={{
-                    fontSize: 20,
+                    fontSize: { xs: 16, sm: 18, md: 20 },
                     color: "#9ca3af",
                     "&:hover": { color: "#fff" },
                   }}
@@ -151,7 +137,7 @@ export default function Footer() {
               <Link href="#" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
                 <LinkedIn
                   sx={{
-                    fontSize: 20,
+                    fontSize: { xs: 16, sm: 18, md: 20 },
                     color: "#9ca3af",
                     "&:hover": { color: "#fff" },
                   }}
@@ -161,7 +147,7 @@ export default function Footer() {
               <Link href="#" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
                 <Instagram
                   sx={{
-                    fontSize: 20,
+                    fontSize: { xs: 16, sm: 18, md: 20 },
                     color: "#9ca3af",
                     "&:hover": { color: "#fff" },
                   }}
@@ -171,7 +157,7 @@ export default function Footer() {
               <Link href="#" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
                 <Facebook
                   sx={{
-                    fontSize: 20,
+                    fontSize: { xs: 16, sm: 18, md: 20 },
                     color: "#9ca3af",
                     "&:hover": { color: "#fff" },
                   }}
@@ -183,45 +169,20 @@ export default function Footer() {
         </Grid>
 
         {/* Bottom Border */}
-        <Box sx={{ mt: {xs:4, md:4, sm:4}, pt: {xs:0, md:4, sm:0},display:"flex", justifyContent:"center", flexDirection:"column"}} >
-          <Divider sx={{ borderColor: "#1f2937", mb: 2 }} />
+        <Box sx={{ mt: { xs: 2, sm: 3 }, pt: { xs: 1.5, sm: 2 } }}>
+          <Divider sx={{ borderColor: "#1f2937", mb: { xs: 1.5, sm: 2 } }} />
           <Box
             sx={{
               display: "flex",
-              flexDirection: { xs: "column", md: "row" },
+              flexDirection: { xs: "column", sm: "row" },
               justifyContent: "center",
               alignItems: "center",
-              gap: { xs: 2, md: 0 },
+              gap: { xs: 1, sm: 1.5 },
             }}
           >
-            <Typography sx={{ color: "#9ca3af", fontSize: "0.875rem",textAlign: 'center', }} >
+            <Typography sx={{ color: "#9ca3af", fontSize: { xs: "0.7rem", sm: "0.8rem", md: "0.875rem" }, textAlign: "center" }}>
               © {currentYear} Communication - Chat. All rights reserved.
             </Typography>
-            {/* <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Link
-                href="/privacy"
-                sx={{
-                  color: "#9ca3af",
-                  textDecoration: "none",
-                  fontSize: "0.875rem",
-                  "&:hover": { color: "#fff" },
-                }}
-              >
-                Privacy Policy
-              </Link>
-              <Typography sx={{ color: "#4b5563", fontSize: "0.875rem" }}>•</Typography>
-              <Link
-                href="/terms"
-                sx={{
-                  color: "#9ca3af",
-                  textDecoration: "none",
-                  fontSize: "0.875rem",
-                  "&:hover": { color: "#fff" },
-                }}
-              >
-                Terms of Service
-              </Link>
-            </Box> */}
           </Box>
         </Box>
       </Container>

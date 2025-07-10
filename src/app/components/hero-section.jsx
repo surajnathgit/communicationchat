@@ -107,7 +107,7 @@ const ChatAnimation = () => {
       <Box
         sx={{
           maxWidth: 500,
-          width: { xs: 300, sm: 350, md: 400 },
+          width: { xs: 350, sm: 370, md: 400, lg:450 },
           mx: "auto",
         }}
       >
@@ -460,7 +460,7 @@ const HeroSection = () => {
                       >
                         Communication
                       </Box>
-                      {isTablet ? <br /> : " "}
+                      <br />
                       <Box
                         component="span"
                         sx={{
