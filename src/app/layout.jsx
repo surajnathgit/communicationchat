@@ -7,7 +7,7 @@ import Footer from "./commoncomponents/footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "SecureChat Pro - Enterprise Communication Platform",
+  title: "Communication-Chat",
   description:
     "Revolutionize team communication with real-time secure chat, file sharing, video calls, and AI-powered features",
   generator: "v0.dev",

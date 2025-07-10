@@ -20,7 +20,7 @@ export default function Footer() {
           px: 2,
         }}
       >
-        <Grid container spacing={4} sx={{display:"flex", gap:"10rem", justifyContent:"center"}}>
+        <Grid container spacing={4} sx={{display:"flex", gap: { xs: 3, md: "10rem" }, justifyContent:"center"}}>
           {/* Product Logo and Copyright */}
           <Grid item xs={12} md={3}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -134,7 +134,7 @@ export default function Footer() {
 
           {/* Social Media */}
           <Grid item xs={12} md={3}>
-            <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+            <Typography variant="h6" sx={{ fontWeight: 600, mb:{xs:0, md:2, sm:4}  }}>
               Follow Us
             </Typography>
             <Box sx={{ display: "flex", gap: 2 }}>
@@ -183,7 +183,7 @@ export default function Footer() {
         </Grid>
 
         {/* Bottom Border */}
-        <Box sx={{ mt: 4, pt: 4,display:"flex", justifyContent:"center", flexDirection:"column"}} >
+        <Box sx={{ mt: {xs:4, md:4, sm:4}, pt: {xs:0, md:4, sm:0},display:"flex", justifyContent:"center", flexDirection:"column"}} >
           <Divider sx={{ borderColor: "#1f2937", mb: 2 }} />
           <Box
             sx={{

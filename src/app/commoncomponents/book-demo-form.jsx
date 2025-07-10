@@ -373,7 +373,8 @@ useEffect(() => {
           },
           scrollbarWidth: "none",
           msOverflowStyle: "none",
-          pt:{xs:"4rem", sm:"4rem",md:"0rem", lg:"0rem"}
+          pt:{xs:"4rem", sm:"4rem",md:"0rem", lg:"0rem"},
+          pb:"2rem"
         }}
       >
         <Box sx={{ position: "absolute", inset: 0, overflow: "hidden" }}>

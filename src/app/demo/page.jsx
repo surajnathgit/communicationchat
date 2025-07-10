@@ -266,7 +266,7 @@ function ProductDemo() {
                       >
                         <Card
                           sx={{
-                            width: 400,
+                            width: {xs:"100%", sm:"100%", md:400, lg:400},
                             minHeight: 220,
                             backgroundColor: "rgba(255, 255, 255, 0.1)",
                             backdropFilter: "blur(4px)",
@@ -322,28 +322,40 @@ function ProductDemo() {
                   What sets Communication - Chat apart from the competition
                 </Typography>
               </Box>
-              <Card
-                sx={{
-                  maxWidth: 1000,
-                  mx: "auto",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(4px)",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                }}
-              >
-                <CardContent sx={{ p: 4 }}>
-                  <Grid container spacing={2}>
-                    {advantages.map((advantage, index) => (
-                      <Grid item xs={12} md={6} key={index}>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1 }}>
-                          <CheckCircleIcon sx={{ fontSize: 20, color: "#4ade80" }} />
-                          <Typography sx={{ color: "#e9d5ff" }}>{advantage}</Typography>
-                        </Box>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </CardContent>
-              </Card>
+<Card
+  sx={{
+    maxWidth: 1000,
+    mx: "auto",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backdropFilter: "blur(4px)",
+    border: "1px solid rgba(255, 255, 255, 0.2)",
+  }}
+>
+  <CardContent sx={{ p: 4 }}>
+    <Grid container spacing={4}>
+      {/* Left Column */}
+      <Grid item xs={12} md={6}>
+        {advantages.slice(0, 3).map((advantage, index) => (
+          <Box key={index} sx={{ display: "flex", alignItems: "flex-start", gap: 1.5, mb: 2 }}>
+            <CheckCircleIcon sx={{ fontSize: 20, color: "#4ade80", mt: "3px" }} />
+            <Typography sx={{ color: "#e9d5ff", lineHeight: 1.6 }}>{advantage}</Typography>
+          </Box>
+        ))}
+      </Grid>
+
+      {/* Right Column */}
+      <Grid item xs={12} md={6}>
+        {advantages.slice(3, 6).map((advantage, index) => (
+          <Box key={index} sx={{ display: "flex", alignItems: "flex-start", gap: 1.5, mb: 2 }}>
+            <CheckCircleIcon sx={{ fontSize: 20, color: "#4ade80", mt: "3px" }} />
+            <Typography sx={{ color: "#e9d5ff", lineHeight: 1.6 }}>{advantage}</Typography>
+          </Box>
+        ))}
+      </Grid>
+    </Grid>
+  </CardContent>
+</Card>
+
             </Box>
           </ScrollAnimation>
 
