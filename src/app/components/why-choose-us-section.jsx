@@ -91,7 +91,7 @@ export default function WhyChooseUsSection() {
         </ScrollAnimation>
 
         <Box sx={{ display: "flex", justifyContent: "center", mb: 10 }}>
-          <Grid container spacing={4} sx={{ maxWidth: 1200 }}>
+          <Grid container spacing={4} sx={{ maxWidth: 1200 }} justifyContent={"center"}>
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon
               return (

@@ -151,11 +151,11 @@ export default function FeaturesSection() {
         </ScrollAnimation>
 
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Grid container spacing={3} sx={{ maxWidth: 1200 }}>
+          <Grid container spacing={3} sx={{ maxWidth: 1200 }} justifyContent={"center"}>
             {features.map((feature, index) => {
               const IconComponent = feature.icon
               return (
-                <Grid item xs={12} sm={6} md={6} lg={3} key={index}>
+                <Grid item xs={12} sm={6} md={6} lg={3} key={index} >
                   <ScrollAnimation
                     direction="up"
                     distance={80}

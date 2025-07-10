@@ -41,20 +41,27 @@ const BookDemoForm = ({ open, onClose }) => {
   })
 
   // Hide navbar and footer when form is open
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden "
-      const navbar = document.querySelector("nav")
-      const footer = document.querySelector("footer")
-      if (navbar) navbar.style.display = "none"
-      if (footer) footer.style.display = "none"
-      return () => {
-        document.body.style.overflow = "auto"
-        if (navbar) navbar.style.display = ""
-        if (footer) footer.style.display = ""
-      }
-    }
-  }, [open])
+useEffect(() => {
+  const navbar = document.querySelector("nav")
+  const footer = document.querySelector("footer")
+
+  if (open) {
+    document.body.classList.add("no-scroll")
+    if (navbar) navbar.style.display = "none"
+    if (footer) footer.style.display = "none"
+  } else {
+    document.body.classList.remove("no-scroll")
+    if (navbar) navbar.style.display = ""
+    if (footer) footer.style.display = ""
+  }
+
+  return () => {
+    document.body.classList.remove("no-scroll")
+    if (navbar) navbar.style.display = ""
+    if (footer) footer.style.display = ""
+  }
+}, [open])
+
 
   // Industry options
   const industryOptions = [
@@ -366,6 +373,7 @@ const BookDemoForm = ({ open, onClose }) => {
           },
           scrollbarWidth: "none",
           msOverflowStyle: "none",
+          pt:{xs:"4rem", sm:"4rem",md:"0rem", lg:"0rem"}
         }}
       >
         <Box sx={{ position: "absolute", inset: 0, overflow: "hidden" }}>

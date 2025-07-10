@@ -5,7 +5,7 @@ import { motion, useAnimation } from "framer-motion";
 
 const ScrollAnimation = ({
   children,
-  direction = "up", // up, down, left, right
+  direction = "up",
   distance = 50,
   duration = 0.6,
   delay = 0,
@@ -17,9 +17,9 @@ const ScrollAnimation = ({
 }) => {
   const controls = useAnimation();
   const ref = useRef(null);
+  const [inView, setInView] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  // Define animation variants based on direction
   const getVariants = () => {
     const directions = {
       up: { y: distance },
@@ -47,48 +47,28 @@ const ScrollAnimation = ({
   };
 
   useEffect(() => {
-    // Skip if ref is not available
     if (!ref.current) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Wrap animation trigger in try-catch for safety
-        try {
-          if (entry.isIntersecting) {
-            if (!hasAnimated || !triggerOnce) {
-              controls.start("visible").catch((err) => {
-                console.error("Animation start failed:", err);
-              });
-              if (triggerOnce) {
-                setHasAnimated(true);
-              }
-            }
-          } else if (!triggerOnce) {
-            controls.start("hidden").catch((err) => {
-              console.error("Animation reset failed:", err);
-            });
-          }
-        } catch (err) {
-          console.error("IntersectionObserver error:", err);
-        }
-      },
-      {
-        threshold,
-        rootMargin,
-      }
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold, rootMargin }
     );
 
-    // Store ref.current in a variable to avoid stale closure issues
-    const currentRef = ref.current;
-    observer.observe(currentRef);
+    observer.observe(ref.current);
 
-    // Cleanup observer on unmount
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      if (ref.current) observer.unobserve(ref.current);
     };
-  }, [controls, threshold, triggerOnce, hasAnimated, rootMargin, direction, distance, duration, delay]);
+  }, [threshold, rootMargin]);
+
+  useEffect(() => {
+    if (inView && (!hasAnimated || !triggerOnce)) {
+      controls.start("visible");
+      if (triggerOnce) setHasAnimated(true);
+    } else if (!inView && !triggerOnce) {
+      controls.start("hidden");
+    }
+  }, [inView, controls, triggerOnce, hasAnimated]);
 
   return (
     <motion.div

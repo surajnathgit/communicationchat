@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { motion, useAnimation } from "framer-motion"
+import { useEffect, useRef, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
 
 const StaggeredScrollAnimation = ({
   children,
@@ -10,14 +10,15 @@ const StaggeredScrollAnimation = ({
   duration = 0.6,
   staggerDelay = 0.1,
   threshold = 0.1,
-  triggerOnce = false, // Changed to false for repeat animations
+  triggerOnce = false,
   className = "",
   rootMargin = "0px 0px -10px 0px",
   ...props
 }) => {
-  const controls = useAnimation()
-  const ref = useRef(null)
-  const [hasAnimated, setHasAnimated] = useState(false)
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   const getVariants = () => {
     const directions = {
@@ -25,7 +26,7 @@ const StaggeredScrollAnimation = ({
       down: { y: -distance },
       left: { x: distance },
       right: { x: -distance },
-    }
+    };
 
     return {
       hidden: {
@@ -41,8 +42,8 @@ const StaggeredScrollAnimation = ({
           ease: [0.25, 0.46, 0.45, 0.94],
         },
       },
-    }
-  }
+    };
+  };
 
   const containerVariants = {
     hidden: {},
@@ -51,42 +52,31 @@ const StaggeredScrollAnimation = ({
         staggerChildren: staggerDelay,
       },
     },
-  }
+  };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Element is visible - animate in
-          if (!hasAnimated || !triggerOnce) {
-            controls.start("visible")
-            if (triggerOnce) {
-              setHasAnimated(true)
-            }
-          }
-        } else {
-          // Element is not visible - animate out
-          if (!triggerOnce) {
-            controls.start("hidden")
-          }
-        }
-      },
-      {
-        threshold,
-        rootMargin,
-      },
-    )
+    if (!ref.current) return;
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold, rootMargin }
+    );
+
+    observer.observe(ref.current);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
-      }
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, [threshold, rootMargin]);
+
+  useEffect(() => {
+    if (inView && (!hasAnimated || !triggerOnce)) {
+      controls.start("visible");
+      if (triggerOnce) setHasAnimated(true);
+    } else if (!inView && !triggerOnce) {
+      controls.start("hidden");
     }
-  }, [controls, threshold, triggerOnce, hasAnimated, rootMargin])
+  }, [inView, controls, triggerOnce, hasAnimated]);
 
   return (
     <motion.div
@@ -105,7 +95,7 @@ const StaggeredScrollAnimation = ({
           ))
         : children}
     </motion.div>
-  )
-}
+  );
+};
 
-export default StaggeredScrollAnimation
+export default StaggeredScrollAnimation;
