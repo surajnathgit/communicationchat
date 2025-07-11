@@ -189,7 +189,9 @@ export default function ChatSecureComparison() {
       }}
     >
       {/* Particle Background */}
-      <ParticleBackground count={45} speed={0.25} />
+      <ParticleBackground count={50} speed={0.3}
+        minSize={2}
+        maxSize={3} />
 
       <Box
         sx={{
@@ -249,7 +251,7 @@ export default function ChatSecureComparison() {
                 mx: "auto",
               }}
             >
-              See how ChatSecure eliminates email dependency and creates seamless real-time collaboration
+              See how Communication-Chat eliminates email dependency and creates seamless real-time collaboration
             </Typography>
           </Box>
         </ScrollAnimation>
@@ -425,7 +427,7 @@ export default function ChatSecureComparison() {
               </Card>
             </Grid>
 
-            {/* After - ChatSecure Communication */}
+            {/* After - Communication-Chat Communication */}
             <Grid item xs={12} lg={6}>
               <Card
                 sx={{
@@ -541,20 +543,20 @@ export default function ChatSecureComparison() {
               <Typography sx={{ color: "#fff", fontWeight: 600 }}>Email Communication</Typography>
               <ArrowForward sx={{ fontSize: 24, color: "#c4b5fd" }} />
               <Forum sx={{ fontSize: 24, color: "#4ade80" }} />
-              <Typography sx={{ color: "#fff", fontWeight: 600 }}>ChatSecure Platform</Typography>
+              <Typography sx={{ color: "#fff", fontWeight: 600 }}>Communication-Chat</Typography>
             </Box>
           </Box>
         </ScaleScrollAnimation>
 
         {/* Competitive Comparison Table */}
         <ScrollAnimation direction="up" distance={60} duration={0.8} delay={0.3}>
-          <Box sx={{ mb: 4 }} mx={"auto"} maxWidth={"lg"}>
+          <Box sx={{ mb: 8 }} mx={"auto"} maxWidth={"lg"}>
             <Box sx={{ textAlign: "center", mb: 6 }}>
               <Typography variant="h3" sx={{ fontSize: "1.875rem", fontWeight: 700, color: "#fff", mb: 1 }}>
-                How ChatSecure Compares
+                How Communication-Chat Compares
               </Typography>
               <Typography sx={{ color: "#e9d5ff", fontSize: "1rem" }}>
-                See why ChatSecure leads in enterprise communication
+                See why Communication-Chat leads in enterprise communication
               </Typography>
             </Box>
 
@@ -575,7 +577,7 @@ export default function ChatSecureComparison() {
                         <TableCell sx={{ color: "#fff", fontWeight: 700, p: 2, textAlign: "center", minWidth: 150 }}>
                           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <Chip
-                              label="ChatSecure"
+                              label="Communication-Chat"
                               sx={{
                                 background: "#fff",
                                 color: "#7c3aed",
@@ -685,7 +687,7 @@ export default function ChatSecureComparison() {
 
         {/* Key Benefits Summary */}
         <StaggeredScrollAnimation direction="up" distance={50} duration={0.6} staggerDelay={0.2}>
-          <Grid container spacing={3} sx={{ mb: 6 }} justifyContent={"center"}>
+          <Grid container spacing={3} sx={{ mb: 3 }} justifyContent={"center"}>
             <Grid item xs={12} md={4}>
               <Card
                 sx={{

@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 const ParticleBackground = ({
   count = 50,
-  colors = ["#8B5CF6", "#A855F7", "#C084FC", "#DDD6FE"],
+  colors = ["#a78bfa", "#c084fc", "#818cf8", "#facc15", "#8B008B", "#FF1493", "#FFD700", "#32CD32"],
   minSize = 2,
   maxSize = 6,
   speed = 0.5,

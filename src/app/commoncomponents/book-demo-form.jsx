@@ -388,15 +388,7 @@ const labelStyles = {
         }}
       >
         <Box sx={{ position: "absolute", inset: 0, overflow: "hidden", opacity: 0.6 }}>
-          <ParticleBackground
-            count={100}
-            colors={["#9333EA", "#D8B4FE", "#A855F7", "#F3E8FF", "#8B5CF6"]}
-            minSize={1}
-            maxSize={4}
-            speed={0.3}
-            connected={true}
-            opacity={0.7}
-          />
+<ParticleBackground colors={['#FF5722', '#FF8A50', '#00BCD4', '#4DD0E1']}  count={30}   speed={0.3}   minSize={6}   maxSize={8}   style={{ opacity: 0.5 }} />
         </Box>
         <Box sx={{ position: "relative", zIndex: 10, maxHeight: "100%" }}>
           <Box sx={{ p: 4, pb: 2, position: "relative" }}>

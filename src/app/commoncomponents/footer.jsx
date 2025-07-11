@@ -134,7 +134,7 @@ export default function Footer() {
                 />
                 <Typography sx={{ display: "none" }}>Twitter</Typography>
               </Link>
-              <Link href="#" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
+              <Link href="https://www.linkedin.com/company/fin-coopers-tech-india-private-limited/?viewAsMember=true" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
                 <LinkedIn
                   sx={{
                     fontSize: { xs: 16, sm: 18, md: 20 },
@@ -144,7 +144,7 @@ export default function Footer() {
                 />
                 <Typography sx={{ display: "none" }}>LinkedIn</Typography>
               </Link>
-              <Link href="#" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
+              <Link href="https://www.instagram.com/fincoopers.tech?igsh=MXM1aTN3eno3Y3Vobg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
                 <Instagram
                   sx={{
                     fontSize: { xs: 16, sm: 18, md: 20 },
@@ -154,7 +154,7 @@ export default function Footer() {
                 />
                 <Typography sx={{ display: "none" }}>Instagram</Typography>
               </Link>
-              <Link href="#" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
+              <Link href="https://www.facebook.com/share/16cozxSfFt/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" sx={{ display: "flex", alignItems: "center" }}>
                 <Facebook
                   sx={{
                     fontSize: { xs: 16, sm: 18, md: 20 },

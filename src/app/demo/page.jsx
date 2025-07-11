@@ -110,7 +110,7 @@ function ProductDemo() {
         background: "linear-gradient(135deg, #4c1d95 0%, #5b21b6 50%, #312e81 100%)",
         position: "relative",
         overflow: "hidden",
-        pt: 8,
+        pt: 2,
       }}
     >
       {/* Particle Background */}
@@ -120,10 +120,10 @@ function ProductDemo() {
         <Container maxWidth="xl">
           {/* Hero Section */}
           <ScrollAnimation direction="up" distance={50} duration={0.8} delay={0.1}>
-            <Box sx={{ textAlign: "center", mb: 8 }}>
+            <Box sx={{ textAlign: "center", mb: 2 }}>
               <Typography
                 variant="h2"
-                sx={{ fontSize: { xs: "2.5rem", md: "3.5rem" }, fontWeight: "bold", color: "white", mb: 3 }}
+                sx={{ fontSize: { xs: "2.5rem", md: "3.5rem" }, fontWeight: "bold", color: "white", mb: 2 }}
               >
                 Product{" "}
                 <span
@@ -138,7 +138,7 @@ function ProductDemo() {
               </Typography>
               <Typography
                 variant="h6"
-                sx={{ fontSize: "1.25rem", color: "#e9d5ff", maxWidth: "32rem", mx: "auto", mb: 4 }}
+                sx={{ fontSize: "1.25rem", color: "#e9d5ff", maxWidth: "32rem", mx: "auto", mb: 2 }}
               >
                 Experience the power of Communication - Chat with our interactive demonstration
               </Typography>

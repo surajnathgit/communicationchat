@@ -358,7 +358,14 @@ const HeroSection = () => {
     >
       {/* Particle Background */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-        <ParticleBackground count={isMobile ? 30 : isTablet ? 45 : 60} speed={0.3} />
+<ParticleBackground
+  colors={["#a78bfa", "#c084fc", "#818cf8", "#facc15"]}
+  count={isMobile ? 30 : isTablet ? 45 : 60}
+  speed={0.3}
+  opacity={0.9}
+  connected={true}
+/>
+
       </motion.div>
 
       {/* Gradient Overlay */}
