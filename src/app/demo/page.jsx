@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Box,
   Container,
@@ -14,6 +13,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Stack,
 } from "@mui/material";
 import {
   Security as SecurityIcon,
@@ -25,6 +25,8 @@ import {
   CheckCircle as CheckCircleIcon,
   Lock as LockIcon,
 } from "@mui/icons-material";
+import { AccessAlarm, Lock, Gavel, Cloud, Room, Schedule } from "@mui/icons-material";
+import { ArrowForward, PlayArrow, Security, Bolt, People, Star, SmartToy, Message } from "@mui/icons-material"
 import ParticleBackground from "../components/particle-background";
 import ScrollAnimation from "../components/scroll-animation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -232,19 +234,21 @@ function ProductDemo() {
       }}
       ref={containerRef}
     >
-      <Box sx={{ position: "relative", zIndex: 10, pt: 10, pb: 12 }}>
-        <Container maxWidth="xl">
+      <Box sx={{ position: "relative", zIndex: 10, pt: { xs: 15, md: 10 }, pb: { xs: 5, md: 10 } }}>
+        <Box sx={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }}>
           <ParticleBackground count={50} speed={0.3} />
+        </Box>
+        <Container maxWidth={false}>
           <ScrollAnimation direction="up" distance={50} duration={0.8} delay={0.1}>
             <Grid container spacing={4} alignItems="center" justifyContent={"center"}>
-              <Grid item size={{ xs: 12, md: 12 }}>
+              <Grid item size={{ xs: 12, md: 12 }} sx={{display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column"}}>
                 <ScrollAnimation direction="up" distance={30} duration={0.7} delay={0.3}>
                   <Typography
                     variant="h4"
                     sx={{
                       fontWeight: "bold",
                       lineHeight: { xs: 1.1, sm: 1.2 },
-                      textAlign: "center"
+                      textAlign: "center",
                     }}
                   >
                     <Box
@@ -260,7 +264,8 @@ function ProductDemo() {
                   </Typography>
                 </ScrollAnimation>
 
-                <ScrollAnimation direction="up" distance={30} duration={0.6} delay={0.4}>
+                <ScrollAnimation direction="up" distance={30} duration={0.6} delay={0.4} >
+                 <Box sx={{display:"flex", justifyContent:"center"}}>
                   <Typography
                     variant="body1"
                     sx={{
@@ -268,15 +273,98 @@ function ProductDemo() {
                       fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
                       lineHeight: { xs: 1.5, sm: 1.6 },
                       textAlign: "center",
+                      pt: { xs: 2, sm: 2, md: 2 },
+                      width:{xs: "100%", sm:  "100%", md:  "70%"}
                     }}
                   >
                     Transform your team communication with intelligent automation. Communication - Chat Pro
                     streamlines collaboration from messaging to file sharing, working around the clock to enhance your
                     productivity.
                   </Typography>
+                  </Box>
+                </ScrollAnimation>
+
+                <ScrollAnimation direction="up" distance={30} duration={0.5} staggerDelay={0.1}>
+                  <Grid
+                    container
+                    spacing={{ xs: 1, sm: 1.2, md: 1.5 }}
+                    sx={{
+                      pt: { xs: 5, sm: 5, },
+                      justifyContent: { xs: "center", md: "flex-start" },
+                      display: { xs: "flex", sm: "none" },
+                    }}
+                  >
+                    {[
+                      { Icon: Security, title: "Automated Job Posted", subtitle: "Streamlined job distribution" },
+                      { Icon: People, title: "AI Resume Screening", subtitle: "Intelligent candidate matching" },
+                      { Icon: Star, title: "Analytics & Insights", subtitle: "Data-driven hiring decisions" },
+                      { Icon: Bolt, title: "Candidate Matching", subtitle: "Perfect fit every time" },
+                    ].map((feature, index) => (
+                      <Grid item key={index} size={{ xs: 6, sm: 6 }} >
+                        <motion.div
+                          initial="hidden"
+                          animate="visible"
+                          whileHover="hover"
+                        >
+                          <Card
+                            sx={{
+                              backgroundColor: "rgba(255, 255, 255, 0.1)",
+                              backdropFilter: "blur(4px)",
+                              border: "1px solid rgba(255, 255, 255, 0.2)",
+                              borderRadius: { xs: 1.2, sm: 1.5, md: 2 },
+                              p: { xs: 0.8, sm: 1, md: 1.2 },
+                              height: "100%",
+                              transition: "all 0.3s ease",
+                            }}
+                          >
+                            <CardContent sx={{ p: 0, "&:last-child": { pb: 0 } }}>
+                              <feature.Icon
+                                sx={{
+                                  fontSize: { xs: 16, sm: 18, md: 20, lg: 22 },
+                                  color: "#67e8f9",
+                                  mb: { xs: 0.5, sm: 0.7, md: 0.8 },
+                                }}
+                              />
+                              <Typography
+                                variant="body2"
+                                sx={{
+                                  fontWeight: "medium",
+                                  color: "#fff",
+                                  mb: { xs: 0.2, sm: 0.3, md: 0.4 },
+                                  fontSize: {
+                                    xs: "0.65rem",
+                                    sm: "0.75rem",
+                                    md: "0.8rem",
+                                    lg: "0.875rem",
+                                  },
+                                }}
+                              >
+                                {feature.title}
+                              </Typography>
+                              <Typography
+                                variant="caption"
+                                sx={{
+                                  color: "#e9d5ff",
+                                  fontSize: {
+                                    xs: "0.55rem",
+                                    sm: "0.6rem",
+                                    md: "0.65rem",
+                                    lg: "0.7rem",
+                                  },
+                                  lineHeight: 1.3,
+                                }}
+                              >
+                                {feature.subtitle}
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      </Grid>
+                    ))}
+                  </Grid>
                 </ScrollAnimation>
               </Grid>
-              <Grid item size={{ xs: 12, md: 10 }}>
+              <Grid item size={{ xs: 12, md: 12 }}>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -284,18 +372,40 @@ function ProductDemo() {
                   viewport={{ once: true }}
                   style={{ textAlign: "center" }}
                 >
-                  <video
-                    src="/videos/chatvideo2.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    style={{
-                      width: "100%",
-                      borderRadius: "16px",
-                      border: "3px solid black",
-                      boxShadow: "0 0 20px rgba(0,0,0,0.4)",
-                    }}
-                  />
+                  <Box sx={{ zIndex: 10 }}>
+                    <Box
+                      sx={{
+                        display: { xs: "block", sm: "none" },
+                      }}
+                    >
+                      <Box
+                        component="img"
+                        src="/screenshots/demopageimg.png"
+                        alt="Communication - Chat Demo"
+                        sx={{
+                          width: "100%",
+                        }}
+                      />
+                    </Box>
+                    <Box
+                      sx={{
+                        display: { xs: "none", sm: "block" },
+                      }}
+                    >
+                      <video
+                        src="/videos/chatvideo2.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        style={{
+                          width: "100%",
+                          borderRadius: "16px",
+                          border: "3px solid rgba(255, 255, 255, 1)",
+                          boxShadow: "0 0 25px rgba(255, 255, 255, 0.4)",
+                        }}
+                      />
+                    </Box>
+                  </Box>
                 </motion.div>
               </Grid>
             </Grid>
@@ -325,7 +435,9 @@ function ProductDemo() {
             transition: "opacity 0.3s ease",
           }}
         >
-          <ParticleBackground count={50} speed={0.3} />
+          <Box sx={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }}>
+            <ParticleBackground count={50} speed={0.3} />
+          </Box>
           <Container maxWidth="xl">
             <Grid container spacing={2} alignItems="center">
               <Grid item size={{ xs: 12, md: 6 }}>
@@ -337,7 +449,7 @@ function ProductDemo() {
                     exit={{ opacity: 0, x: 50 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                   >
-                    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                    <Box sx={{ display: "flex", alignItems: "center", mb: 2, mt: 4 }}>
                       {screenshotDetails[currentIndex].icon}
                       <Typography variant="h4" sx={{ color: "white" }}>
                         {screenshotDetails[currentIndex].heading}
@@ -377,13 +489,13 @@ function ProductDemo() {
                       alt={screenshotDetails[currentIndex].heading}
                       sx={{
                         width: {
-                          xs: "100%", 
-                          sm: "90%", 
-                          md: "100%", 
+                          xs: currentIndex === 1 ? "80%" : "100%",
+                          sm: currentIndex === 1 ? "70%" : "90%",
+                          md: currentIndex === 1 ? "80%" : "100%",
                         },
                         height: {
-                          xs: "auto", 
-                          md: "65vh", 
+                          xs: "auto",
+                          md: currentIndex === 1 ? "50vh" : "65vh",
                         },
                         borderRadius: 4,
                         objectFit: "contain",
@@ -399,24 +511,384 @@ function ProductDemo() {
         </Box>
       </Box>
       <Box sx={{ position: "relative", zIndex: 10, py: 6, background: "linear-gradient(to right, #5b21b6, #4c1d95)", }}>
-        <Container maxWidth="xl">
+        <Box sx={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }}>
           <ParticleBackground count={50} speed={0.3} />
+        </Box>
+        <Container maxWidth="xl">
           <ScrollAnimation direction="up" distance={50} duration={0.8} delay={0.1}>
             <Box sx={{ textAlign: "center", mb: 8 }}>
               <Typography
-                variant="h2"
-                sx={{ fontSize: { xs: "2.5rem", md: "3.5rem" }, fontWeight: "bold", color: "white", mb: 2 }}
+                variant="h4"
+                sx={{
+                  fontWeight: "bold",
+                  color: "white",
+                  mb: 2,
+                  fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.5rem" }
+                }}
               >
-                Introducing Our Product
+                Powerful Features for Communication - Chat
               </Typography>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <img
-                  src="/screenshots/mobilimg.png"
-                  style={{ maxWidth: "50%", height: "90vh" }}
-                  alt="Communication - Chat Product"
-                />
-              </Box>
+              <Typography
+                sx={{
+                  color: "#e9d5ff",
+                  maxWidth: 800,
+                  mx: "auto",
+                  fontSize: { xs: "1rem", md: "1.1rem" }
+                }}
+              >
+                Transform team collaboration with advanced chat features designed to enhance productivity and security.
+              </Typography>
             </Box>
+
+            <Grid container spacing={6} alignItems="center" justifyContent="center" sx={{ mb: 15 }}>
+              <Grid item size={{ xs: 12, md: 4 }}>
+                <Stack spacing={5}>
+                  <Card
+                    sx={{
+                      bgcolor: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      p: 3,
+                      borderRadius: 4,
+                      transition: "all 0.3s",
+                      "&:hover": {
+                        transform: "translateY(-5px)",
+                        boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+                        bgcolor: "rgba(255, 255, 255, 0.1)"
+                      }
+                    }}
+                  >
+                    <Box display="flex" alignItems="flex-start">
+                      <Box
+                        sx={{
+                          bgcolor: "#5b21b6",
+                          p: 1.5,
+                          borderRadius: 2,
+                          mr: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center"
+                        }}
+                      >
+                        <SecurityIcon sx={{ color: "white", fontSize: 28 }} />
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: "bold",
+                            color: "white",
+                            mb: 1
+                          }}
+                        >
+                          End-to-End Encryption
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "#e9d5ff",
+                            lineHeight: 1.6
+                          }}
+                        >
+                          Military-grade encryption ensures all messages remain completely private and secure.
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Card>
+
+                  <Card
+                    sx={{
+                      bgcolor: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      p: 3,
+                      borderRadius: 4,
+                      transition: "all 0.3s",
+                      "&:hover": {
+                        transform: "translateY(-5px)",
+                        boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+                        bgcolor: "rgba(255, 255, 255, 0.1)"
+                      }
+                    }}
+                  >
+                    <Box display="flex" alignItems="flex-start">
+                      <Box
+                        sx={{
+                          bgcolor: "#5b21b6",
+                          p: 1.5,
+                          borderRadius: 2,
+                          mr: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center"
+                        }}
+                      >
+                        <GroupWorkIcon sx={{ color: "white", fontSize: 28 }} />
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: "bold",
+                            color: "white",
+                            mb: 1
+                          }}
+                        >
+                          Group Collaboration
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "#e9d5ff",
+                            lineHeight: 1.6
+                          }}
+                        >
+                          Unlimited participants with advanced moderation tools for efficient teamwork.
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Card>
+
+                  <Card
+                    sx={{
+                      bgcolor: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      p: 3,
+                      borderRadius: 4,
+                      transition: "all 0.3s",
+                      "&:hover": {
+                        transform: "translateY(-5px)",
+                        boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+                        bgcolor: "rgba(255, 255, 255, 0.1)"
+                      }
+                    }}
+                  >
+                    <Box display="flex" alignItems="flex-start">
+                      <Box
+                        sx={{
+                          bgcolor: "#5b21b6",
+                          p: 1.5,
+                          borderRadius: 2,
+                          mr: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center"
+                        }}
+                      >
+                        <PsychologyIcon sx={{ color: "white", fontSize: 28 }} />
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: "bold",
+                            color: "white",
+                            mb: 1
+                          }}
+                        >
+                          AI-Powered Assistance
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "#e9d5ff",
+                            lineHeight: 1.6
+                          }}
+                        >
+                          Smart suggestions, auto-translation, and intelligent note-taking capabilities.
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Card>
+                </Stack>
+              </Grid>
+
+              <Grid item size={{ xs: 12, md: 4 }} display="flex" justifyContent="center">
+                <Box sx={{
+                  zIndex: 10,
+                  position: "relative",
+                  "&:before": {
+                    content: '""',
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    background: "radial-gradient(circle, rgba(139,92,246,0.4) 0%, rgba(0,0,0,0) 70%)",
+                    borderRadius: "50%",
+                    filter: "blur(20px)",
+                    zIndex: -1
+                  }
+                }}>
+                  <img
+                    src="/screenshots/mobilimg.png"
+                    alt="Mobile Mockup"
+                    style={{
+                      maxWidth: "100%",
+                      height: "70vh",
+                      objectFit: "contain",
+                      filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.3))"
+                    }}
+                  />
+                </Box>
+              </Grid>
+
+              <Grid item size={{ xs: 12, md: 4 }}>
+                <Stack spacing={5}>
+                  <Card
+                    sx={{
+                      bgcolor: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      p: 3,
+                      borderRadius: 4,
+                      transition: "all 0.3s",
+                      "&:hover": {
+                        transform: "translateY(-5px)",
+                        boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+                        bgcolor: "rgba(255, 255, 255, 0.1)"
+                      }
+                    }}
+                  >
+                    <Box display="flex" alignItems="flex-start">
+                      <Box
+                        sx={{
+                          bgcolor: "#5b21b6",
+                          p: 1.5,
+                          borderRadius: 2,
+                          mr: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center"
+                        }}
+                      >
+                        <VideoCallIcon sx={{ color: "white", fontSize: 28 }} />
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: "bold",
+                            color: "white",
+                            mb: 1
+                          }}
+                        >
+                          HD Video Conferencing
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "#e9d5ff",
+                            lineHeight: 1.6
+                          }}
+                        >
+                          Crystal-clear video calls with screen sharing and recording capabilities.
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Card>
+
+                  <Card
+                    sx={{
+                      bgcolor: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      p: 3,
+                      borderRadius: 4,
+                      transition: "all 0.3s",
+                      "&:hover": {
+                        transform: "translateY(-5px)",
+                        boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+                        bgcolor: "rgba(255, 255, 255, 0.1)"
+                      }
+                    }}
+                  >
+                    <Box display="flex" alignItems="flex-start">
+                      <Box
+                        sx={{
+                          bgcolor: "#5b21b6",
+                          p: 1.5,
+                          borderRadius: 2,
+                          mr: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center"
+                        }}
+                      >
+                        <AttachFileIcon sx={{ color: "white", fontSize: 28 }} />
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: "bold",
+                            color: "white",
+                            mb: 1
+                          }}
+                        >
+                          Secure File Sharing
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "#e9d5ff",
+                            lineHeight: 1.6
+                          }}
+                        >
+                          Virus scanning and version control for all shared documents and media.
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Card>
+
+                  <Card
+                    sx={{
+                      bgcolor: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      p: 3,
+                      borderRadius: 4,
+                      transition: "all 0.3s",
+                      "&:hover": {
+                        transform: "translateY(-5px)",
+                        boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+                        bgcolor: "rgba(255, 255, 255, 0.1)"
+                      }
+                    }}
+                  >
+                    <Box display="flex" alignItems="flex-start">
+                      <Box
+                        sx={{
+                          bgcolor: "#5b21b6",
+                          p: 1.5,
+                          borderRadius: 2,
+                          mr: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center"
+                        }}
+                      >
+                        <LockIcon sx={{ color: "white", fontSize: 28 }} />
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: "bold",
+                            color: "white",
+                            mb: 1
+                          }}
+                        >
+                          Compliance & Security
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "#e9d5ff",
+                            lineHeight: 1.6
+                          }}
+                        >
+                          Meets GDPR, HIPAA, and SOC 2 standards with enterprise-grade security.
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Card>
+                </Stack>
+              </Grid>
+            </Grid>
           </ScrollAnimation>
           <ScrollAnimation direction="up" distance={40} duration={0.7} delay={0.1}>
             <Box sx={{ mb: 10 }}>
